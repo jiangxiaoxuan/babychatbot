@@ -1,0 +1,8 @@
+<ul class = "dialogues">
+    <li *ngFor="let m of this.chatMessages"><span class="badge">{{name}}</span>{{m}}</li>
+</ul>
+<input type="text" 
+    name="chat"
+    class="chatbox"
+    placeholder="Hi there! Type here to talk to me."
+    (keyup.enter)="onEnter()" [(ngModel)]="userInput">
