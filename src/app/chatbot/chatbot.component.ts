@@ -8,12 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ChatbotComponent implements OnInit {
 
-  name = "Andy";
+  name = 'Andy';
 
   chatMessages: string[] = [
-    "Hello",
-    "How are you?"
-  ]
+    'Hello',
+    'How are you?'
+  ];
 
   userInput: string;
 
@@ -26,6 +26,6 @@ export class ChatbotComponent implements OnInit {
     console.log(this.userInput);
     console.log(this.chatMessages);
     this.chatMessages.push(this.userInput);
-    this.userInput = "";
+    this.userInput = '';
   }
 }
