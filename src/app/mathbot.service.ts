@@ -10,7 +10,7 @@ export class MathbotService {
   constructor() { }
 
   getMathQuiz(): Mathquiz {
-    let randomQuiz = QUIZZES[Math.round(Math.random()*(QUIZZES.length - 1))];
+    const randomQuiz = QUIZZES[Math.round(Math.random() * (QUIZZES.length - 1))];
     console.log(randomQuiz);
     return randomQuiz;
   }

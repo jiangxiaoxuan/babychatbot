@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { MathbotService } from '../mathbot.service';
-import { Mathquiz } from '../mathquiz';
+import { HelloWorldAgent } from '../hello.agent';
+import { SayAgent } from '../say.agent';
+import { MathAgent } from '../math.agent';
+import { HandleInputResult } from '../handle-input-result';
+import { Agent, AgentState } from '../agent';
 
 
 @Component({
@@ -10,49 +13,49 @@ import { Mathquiz } from '../mathquiz';
 })
 export class ChatbotComponent implements OnInit {
 
-  name = "Freya";
+  name = 'Freya';
 
   chatMessages: string[] = [
-    "Hello",
-    "How are you?"
-  ]
+    'Hello',
+    'How are you?'
+  ];
 
   userInput: string;
   output: string;
-  quiz: Mathquiz;
-  answer: number;
-  status = "waiting";
+  intent = 'waiting';
+  agentState: AgentState;
+  AGENTS: Agent[] = [this.helloAgent, this.sayAgent, this.mathAgent];
 
-  constructor(private mathbotService: MathbotService) {}
+  constructor(private helloAgent: HelloWorldAgent,
+              private sayAgent: SayAgent,
+              private mathAgent: MathAgent) {
+  }
 
   ngOnInit() {}
 
   onEnter() {
-    this.chatMessages.push(this.userInput);
-    if (this.status === "waiting" && this.userInput === "Math") {
-      this.getMathQuiz();
-      this.status = "validating";
-    } else if (this.status == "validating" && Number(this.userInput) !== NaN) {
-      if (Number(this.userInput) === this.answer) {
-        this.output = "You are correct!";
-        this.status = "waiting";
-      } else {
-        this.output = "Try again!";
+    const userInput = this.userInput;
+    this.userInput = '';
+    this.chatMessages.push(userInput);
+    for (const agent of this.AGENTS) {
+      if (agent.isAgentIntention(userInput) || this.intent === agent.intentName) {
+        if (agent.isAgentIntention(userInput)) {
+          this.intent = agent.intentName;
+        }
+        this.agentState = agent.newState();
+        agent.handleInput(this.agentState, userInput)
+            .subscribe(handleInputResult => {
+                this.output = handleInputResult.reply;
+                this.chatMessages.push(this.output);
+
+                if (handleInputResult.bailout) {
+                  this.intent = 'waiting';
+                }
+              });
+        return;
       }
-    } else {
-      this.output = "Sorry, I don't understand...";
     }
-    this.userInput = "";
+    this.output = 'Sorry, I don\'t understand...';
     this.chatMessages.push(this.output);
-
   }
-
-
-  getMathQuiz(): void {
-    this.quiz = this.mathbotService.getMathQuiz();
-    this.output = this.quiz.question;
-    this.answer = Number(this.quiz.answer);
-  }
-
-
 }
