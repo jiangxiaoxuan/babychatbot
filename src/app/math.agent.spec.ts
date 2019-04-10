@@ -18,17 +18,17 @@ describe('MathAgent', () => {
     observable.subscribe(result => {
       expect(result.bailout).toBeFalsy();
       expect(result.reply).toBeDefined();
-    })
-  })
+    });
+  });
 
   it('should handle wrong user answer', () => {
     const agent: MathAgent = TestBed.get(MathAgent);
-    agent.handleInput('math').subscribe(result => {
+    agent.handleInput('math').subscribe(unused => {
       agent.state.answer = 1;
       agent.handleInput('1').subscribe(result => {
         expect(result.bailout).toBeTruthy();
         expect(result.reply).toBe('You are correct!');
       });
-    })
-  })
+    });
+  });
 });
