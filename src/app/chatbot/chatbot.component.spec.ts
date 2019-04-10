@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { ChatbotComponent } from './chatbot.component';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 describe('ChatbotComponent', () => {
   let component: ChatbotComponent;
@@ -11,7 +11,8 @@ describe('ChatbotComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ ChatbotComponent ],
       imports: [
-        FormsModule
+        FormsModule,
+        HttpClientModule
       ],
     })
     .compileComponents();
