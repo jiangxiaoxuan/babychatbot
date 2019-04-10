@@ -1,5 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { HelloWorldAgent } from '../hello.agent';
+import { SayAgent } from '../say.agent';
+import { MathAgent } from '../math.agent';
+import { HandleInputResult } from '../handle-input-result';
+import { Agent } from '../agent';
 
+
+const WAITING_INTENT = 'waiting';
 
 @Component({
   selector: 'app-chatbot',
@@ -8,7 +15,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ChatbotComponent implements OnInit {
 
-  name = 'Andy';
+  name = 'Freya';
 
   chatMessages: string[] = [
     'Hello',
@@ -16,16 +23,55 @@ export class ChatbotComponent implements OnInit {
   ];
 
   userInput: string;
+  intent = WAITING_INTENT;
+  agents: Agent[] = [this.helloAgent, this.sayAgent, this.mathAgent];
 
-  constructor() {}
-
-  ngOnInit() {
+  constructor(private helloAgent: HelloWorldAgent,
+              private sayAgent: SayAgent,
+              private mathAgent: MathAgent) {
   }
 
+  ngOnInit() {}
+
   onEnter() {
-    console.log(this.userInput);
-    console.log(this.chatMessages);
-    this.chatMessages.push(this.userInput);
+    const userInput = this.userInput;
     this.userInput = '';
+    this.chatMessages.push(userInput);
+
+    let currentAgent: Agent;
+
+    if (this.intent !== WAITING_INTENT) {
+      currentAgent = this.getAgentByIntentName(this.intent);
+    } else {
+      for (const agent of this.agents) {
+        if (agent.isAgentIntention(userInput)) {
+          this.intent = agent.intentName;
+          currentAgent = agent;
+          break;
+        }
+      }
+    }
+
+    if (currentAgent === undefined) {
+      this.chatMessages.push('Sorry, I don\'t understand...');
+      return;
+    }
+
+    currentAgent.handleInput(userInput)
+        .subscribe(handleInputResult => {
+            this.chatMessages.push(handleInputResult.reply);
+            if (handleInputResult.bailout) {
+              this.intent = WAITING_INTENT;
+            }
+          });
+  }
+
+  private getAgentByIntentName(intent: string): Agent {
+    for (const agent of this.agents) {
+      if (agent.intentName === intent) {
+        return agent;
+      }
+    }
+    return undefined;
   }
 }
