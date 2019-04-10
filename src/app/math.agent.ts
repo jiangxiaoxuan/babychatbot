@@ -8,6 +8,8 @@ import { Mathquiz } from './mathquiz';
 
 class MathState {
   isValidate: boolean;
+  question: string;
+  answer: number;
 }
 
 @Injectable({
@@ -20,10 +22,6 @@ export class MathAgent implements Agent {
 
   intentName = 'MATH';
   state: MathState;
-  quiz: Mathquiz;
-  question: string;
-  answer: number;
-
 
   private getState(): MathState {
     if (this.state === undefined) {
@@ -41,12 +39,12 @@ export class MathAgent implements Agent {
     const result = new HandleInputResult();
     if (!mathState.isValidate) {
       this.getMathQuiz();
-      result.reply = this.question;
+      result.reply = this.state.question;
       this.state.isValidate = true;
       return of(result);
     }
 
-    if (Number(message) === this.answer) {
+    if (Number(message) === this.state.answer) {
       result.reply = 'You are correct!';
       mathState.isValidate = false;
       result.bailout = true;
@@ -58,8 +56,8 @@ export class MathAgent implements Agent {
   }
 
   private getMathQuiz(): void {
-    this.quiz = this.mathService.getMathQuiz();
-    this.question = this.quiz.question;
-    this.answer = Number(this.quiz.answer);
+    const quiz = this.mathService.getMathQuiz();
+    this.state.question = quiz.question;
+    this.state.answer = Number(quiz.answer);
   }
 }
