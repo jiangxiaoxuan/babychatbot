@@ -1,13 +1,9 @@
 import { HandleInputResult } from './handle-input-result';
 import { Observable } from 'rxjs';
 
-export interface AgentState { }
-
 export interface Agent {
-  intentName: string;
-  state: AgentState;
+  readonly intentName: string;
 
-  newState(): AgentState;
   isAgentIntention(message: string): boolean;
-  handleInput(state: AgentState, message: string): Observable<HandleInputResult>;
+  handleInput(message: string): Observable<HandleInputResult>;
 }

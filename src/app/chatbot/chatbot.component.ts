@@ -3,8 +3,10 @@ import { HelloWorldAgent } from '../hello.agent';
 import { SayAgent } from '../say.agent';
 import { MathAgent } from '../math.agent';
 import { HandleInputResult } from '../handle-input-result';
-import { Agent, AgentState } from '../agent';
+import { Agent } from '../agent';
 
+
+const WAITING_INTENT = 'waiting';
 
 @Component({
   selector: 'app-chatbot',
@@ -21,10 +23,8 @@ export class ChatbotComponent implements OnInit {
   ];
 
   userInput: string;
-  output: string;
-  intent = 'waiting';
-  agentState: AgentState;
-  AGENTS: Agent[] = [this.helloAgent, this.sayAgent, this.mathAgent];
+  intent = WAITING_INTENT;
+  agents: Agent[] = [this.helloAgent, this.sayAgent, this.mathAgent];
 
   constructor(private helloAgent: HelloWorldAgent,
               private sayAgent: SayAgent,
@@ -37,25 +37,41 @@ export class ChatbotComponent implements OnInit {
     const userInput = this.userInput;
     this.userInput = '';
     this.chatMessages.push(userInput);
-    for (const agent of this.AGENTS) {
-      if (agent.isAgentIntention(userInput) || this.intent === agent.intentName) {
+
+    let currentAgent: Agent;
+
+    if (this.intent !== WAITING_INTENT) {
+      currentAgent = this.getAgentByIntentName(this.intent);
+    } else {
+      for (const agent of this.agents) {
         if (agent.isAgentIntention(userInput)) {
           this.intent = agent.intentName;
+          currentAgent = agent;
+          break;
         }
-        this.agentState = agent.newState();
-        agent.handleInput(this.agentState, userInput)
-            .subscribe(handleInputResult => {
-                this.output = handleInputResult.reply;
-                this.chatMessages.push(this.output);
-
-                if (handleInputResult.bailout) {
-                  this.intent = 'waiting';
-                }
-              });
-        return;
       }
     }
-    this.output = 'Sorry, I don\'t understand...';
-    this.chatMessages.push(this.output);
+
+    if (currentAgent === undefined) {
+      this.chatMessages.push('Sorry, I don\'t understand...');
+      return;
+    }
+
+    currentAgent.handleInput(userInput)
+        .subscribe(handleInputResult => {
+            this.chatMessages.push(handleInputResult.reply);
+            if (handleInputResult.bailout) {
+              this.intent = WAITING_INTENT;
+            }
+          });
+  }
+
+  private getAgentByIntentName(intent: string): Agent {
+    for (const agent of this.agents) {
+      if (agent.intentName === intent) {
+        return agent;
+      }
+    }
+    return undefined;
   }
 }

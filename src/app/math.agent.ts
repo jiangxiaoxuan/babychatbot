@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { AgentState, Agent } from './agent';
+import { Agent } from './agent';
 import { Observable, of } from 'rxjs';
 import { HandleInputResult } from './handle-input-result';
 import { MathbotService } from './mathbot.service';
 import { Mathquiz } from './mathquiz';
 
 
-class MathState implements AgentState {
+class MathState {
   isValidate: boolean;
 }
 
@@ -25,7 +25,7 @@ export class MathAgent implements Agent {
   answer: number;
 
 
-  newState(): AgentState {
+  private getState(): MathState {
     if (this.state === undefined) {
       this.state = new MathState();
     }
@@ -36,8 +36,8 @@ export class MathAgent implements Agent {
     return message.toLowerCase() === 'math';
   }
 
-  handleInput(state: AgentState, message: string): Observable<HandleInputResult> {
-    const mathState = state as MathState;
+  handleInput(message: string): Observable<HandleInputResult> {
+    const mathState = this.getState();
     const result = new HandleInputResult();
     if (!mathState.isValidate) {
       this.getMathQuiz();
@@ -57,7 +57,7 @@ export class MathAgent implements Agent {
     return of(result);
   }
 
-  getMathQuiz(): void {
+  private getMathQuiz(): void {
     this.quiz = this.mathService.getMathQuiz();
     this.question = this.quiz.question;
     this.answer = Number(this.quiz.answer);

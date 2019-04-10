@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { AgentState, Agent } from './agent';
+import { Agent } from './agent';
 import { Observable, of } from 'rxjs';
 import { HandleInputResult } from './handle-input-result';
 
-class SayState implements AgentState {
+class SayState {
   userMessage: string;
   confirmation: boolean;
 }
@@ -15,20 +15,19 @@ export class SayAgent implements Agent {
   intentName = 'SAY';
   state: SayState;
 
-  newState(): AgentState {
+  private getState(): SayState {
     if (this.state === undefined) {
      this.state = new SayState();
     }
     return this.state;
   }
 
-
   isAgentIntention(message: string): boolean {
     return message.toLowerCase().startsWith('say');
   }
 
-  handleInput(state: AgentState, message: string): Observable<HandleInputResult> {
-    const sayState = state as SayState;
+  handleInput(message: string): Observable<HandleInputResult> {
+    const sayState = this.getState();
     const result = new HandleInputResult();
     if (!sayState.confirmation) {
       sayState.userMessage = message.substring(4);
