@@ -1,10 +1,14 @@
-<div class="center fill">
+<div class="picture">
+  <div class="image1"><img class="catAtLeft" src="../../assets/catleft.jpg" alt="CatAtLeft"></div>
+  <div class="image2"><img class="catAtRight" src="../../assets/catright.jpg" alt="CatAtRight"></div>
+</div>
+<div class="center">
   <div class="container-0">
     <ul class="dialogues">
       <li *ngFor="let m of this.chatMessages">
         <div id="row1">
           <div id="column1">
-            <span class="badge">{{m.userName}}</span>
+            <img class="avatar" src="{{m.userURL}}" alt="Avatar">
           </div>
           <div id="column2">
             {{m.message}}
