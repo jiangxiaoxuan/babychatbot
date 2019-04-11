@@ -1,8 +1,25 @@
-<ul class = "dialogues">
-    <li *ngFor="let m of this.chatMessages"><span class="badge">{{name}}</span>{{m}}</li>
-</ul>
-<input type="text" 
-    name="chat"
-    class="chatbox"
-    placeholder="Hi there! Type here to talk to me."
-    (keyup.enter)="onEnter()" [(ngModel)]="userInput">
+<div class="center fill">
+  <div class="container-0">
+    <ul class="dialogues">
+      <li *ngFor="let m of this.chatMessages">
+        <div id="row1">
+          <div id="column1">
+            <span class="badge">{{m.userName}}</span>
+          </div>
+          <div id="column2">
+            {{m.message}}
+          </div>
+        </div>
+      </li>
+    </ul>
+    <div class="chatbox-container-0">
+      <div class="chatbox-container-1">
+        <input type="text" 
+            name="chat"
+            class="chatbox"
+            placeholder="Hi there! Type here to talk to me."
+            (keyup.enter)="onEnter()" [(ngModel)]="userInput">
+      </div>
+    </div>
+  </div>
+</div>
