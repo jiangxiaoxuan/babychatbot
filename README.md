@@ -34,11 +34,15 @@ The API documentation is here: http://www.icndb.com/api/
 1. More math questions
 2. A bot that has reminder assistant function
 
-## Play Board Preview
+## Chatbot Preview
 
-<img src="https://github.com/jiangxiaoxuan/babychatbot/raw/master/screenshots/chat-preview.png" width="300" />
+Screenshot 1:
 
-<img src="https://github.com/jiangxiaoxuan/babychatbot/raw/master/screenshots/welcome-page.png" width="300" />
+<img src="https://github.com/jiangxiaoxuan/babychatbot/raw/master/screenshots/chat-preview.png" />
+
+Screenshot 2:
+
+<img src="https://github.com/jiangxiaoxuan/babychatbot/raw/master/screenshots/welcome-page.png" />
 
 ## Development server
 
