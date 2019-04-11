@@ -36,9 +36,9 @@ The API documentation is here: http://www.icndb.com/api/
 
 ## Play Board Preview
 
-<img src="https://github.com/jiangxiaoxuan/tic-tac-toe/raw/master/screenshots/tic_in_progress.png" width="300" />
+<img src="https://github.com/jiangxiaoxuan/babychatbot/raw/master/screenshots/chat-preview.png" width="300" />
 
-<img src="https://github.com/jiangxiaoxuan/tic-tac-toe/raw/master/screenshots/tic_end.png" width="300" />
+<img src="https://github.com/jiangxiaoxuan/babychatbot/raw/master/screenshots/welcome-page.png" width="300" />
 
 ## Development server
 
