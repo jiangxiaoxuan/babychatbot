@@ -20,7 +20,7 @@ export class ChatbotComponent implements OnInit {
 
   chatMessages: string[] = [
     'Hello',
-    'How are you?'
+    'How are you?',
   ];
 
   userInput: string;
