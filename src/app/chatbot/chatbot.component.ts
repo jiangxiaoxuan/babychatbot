@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HelloWorldAgent } from '../hello.agent';
 import { SayAgent } from '../say.agent';
 import { MathAgent } from '../math.agent';
+import { JokeAgent } from '../joke.agent';
 import { HandleInputResult } from '../handle-input-result';
 import { Agent } from '../agent';
 
@@ -24,11 +25,12 @@ export class ChatbotComponent implements OnInit {
 
   userInput: string;
   intent = WAITING_INTENT;
-  agents: Agent[] = [this.helloAgent, this.sayAgent, this.mathAgent];
+  agents: Agent[] = [this.helloAgent, this.sayAgent, this.mathAgent, this.jokeAgent];
 
   constructor(private helloAgent: HelloWorldAgent,
               private sayAgent: SayAgent,
-              private mathAgent: MathAgent) {
+              private mathAgent: MathAgent,
+              private jokeAgent: JokeAgent) {
   }
 
   ngOnInit() {}
