@@ -1,6 +1,44 @@
 # Babychatbot
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.8.
+## Requirements
+
+### Requirement 1: You should build a chat user interface
+The user interface can only have one user and one bot
+There is a place to type your message, just like a chat app
+The chat message is shows sequentially on the screen, just like a chat app
+
+### Requirement 2: Play Mathematic Game
+User should be able to type “Play math game”, and the bot you give the user a random mathematical question
+User should be able to type the answer, and the bot should reply
+
+### Requirement 3: Tell Me a Joke:
+User should be able to type “Tell me a joke”
+The bot should fetch a joke from http://api.icndb.com/jokes/random
+The API documentation is here: http://www.icndb.com/api/
+
+## How to run the chatbot
+
+1. Clone locally: `git clone https://github.com/jiangxiaoxuan/babychatbot.git`
+2. Install dependencies: `npm install`
+3. Start the app: `ng serve --open` 
+
+## Some highlight features
+
+1. If you type "Hello", the bot will reply you "Hello World"
+2. If you type "Say XXXXXX", the bot will confirm with you again whether you truly want it to say it. If you confirm, the bot will continue saying "XXXXXX"; if you type anything else, the bot will say "Ok, good bye."
+3. Start mathematics game by typing keyword "Math"
+4. Start joke function by typing "Tell me a joke"
+
+## Features to be implemented
+
+1. More math questions
+2. A bot that has reminder assistant function
+
+## Play Board Preview
+
+<img src="https://github.com/jiangxiaoxuan/tic-tac-toe/raw/master/screenshots/tic_in_progress.png" width="300" />
+
+<img src="https://github.com/jiangxiaoxuan/tic-tac-toe/raw/master/screenshots/tic_end.png" width="300" />
 
 ## Development server
 
