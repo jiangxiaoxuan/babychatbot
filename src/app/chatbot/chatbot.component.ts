@@ -6,12 +6,15 @@ import { JokeAgent } from '../joke.agent';
 import { HandleInputResult } from '../handle-input-result';
 import { Agent } from '../agent';
 
+// https://avatars0.githubusercontent.com/u/5508096?s=88&v=4
+// https://avatars1.githubusercontent.com/u/16955489?s=88&v=4
 
 const WAITING_INTENT = 'waiting';
 const BOT_NAME = 'Bunnie the Agent';
+const BOT_URL = 'https://avatars1.githubusercontent.com/u/16955489?s=88&v=4';
 
 class ChatMessage {
-  constructor(private userName: string, private message: string) { }
+  constructor(private userName: string, private userURL, private message: string) { }
 }
 
 @Component({
@@ -21,11 +24,12 @@ class ChatMessage {
 })
 export class ChatbotComponent implements OnInit {
 
-  name = 'Freya';
+  name = 'Andy';
+  nameUrl = 'https://avatars0.githubusercontent.com/u/5508096?s=88&v=4';
 
   chatMessages: ChatMessage[] = [
-    new ChatMessage(BOT_NAME, 'Hello'),
-    new ChatMessage(BOT_NAME, 'How are you?')
+    new ChatMessage(BOT_NAME, BOT_URL, 'Hello'),
+    new ChatMessage(BOT_NAME, BOT_URL, 'How are you?')
   ];
 
   userInput: string;
@@ -43,7 +47,7 @@ export class ChatbotComponent implements OnInit {
   onEnter() {
     const userInput = this.userInput;
     this.userInput = '';
-    this.chatMessages.push(new ChatMessage(this.name, userInput));
+    this.chatMessages.push(new ChatMessage(this.name, this.nameUrl, userInput));
 
     let currentAgent: Agent;
 
@@ -60,13 +64,13 @@ export class ChatbotComponent implements OnInit {
     }
 
     if (currentAgent === undefined) {
-      this.chatMessages.push(new ChatMessage(BOT_NAME, 'Sorry, I don\'t understand...'));
+      this.chatMessages.push(new ChatMessage(BOT_NAME, BOT_URL, 'Sorry, I don\'t understand...'));
       return;
     }
 
     currentAgent.handleInput(userInput)
         .subscribe(handleInputResult => {
-            this.chatMessages.push(new ChatMessage(BOT_NAME, handleInputResult.reply));
+            this.chatMessages.push(new ChatMessage(BOT_NAME, BOT_URL, handleInputResult.reply));
             if (handleInputResult.bailout) {
               this.intent = WAITING_INTENT;
             }
