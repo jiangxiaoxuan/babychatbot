@@ -6,9 +6,6 @@ import { JokeAgent } from '../joke.agent';
 import { HandleInputResult } from '../handle-input-result';
 import { Agent } from '../agent';
 
-// https://avatars0.githubusercontent.com/u/5508096?s=88&v=4
-// https://avatars1.githubusercontent.com/u/16955489?s=88&v=4
-
 const WAITING_INTENT = 'waiting';
 const BOT_NAME = 'Bunnie the Agent';
 const BOT_URL = 'https://avatars1.githubusercontent.com/u/16955489?s=88&v=4';
