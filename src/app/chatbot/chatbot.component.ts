@@ -8,7 +8,7 @@ import { Agent } from '../agent';
 
 const WAITING_INTENT = 'waiting';
 const BOT_NAME = 'Bunnie the Agent';
-const BOT_URL = 'https://avatars1.githubusercontent.com/u/16955489?s=88&v=4';
+const BOT_URL = 'https://avatars3.githubusercontent.com/u/16955489?s=460&v=4';
 
 class ChatMessage {
   constructor(private userName: string, private userURL, private message: string) { }
