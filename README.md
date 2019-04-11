@@ -36,13 +36,13 @@ The API documentation is here: http://www.icndb.com/api/
 
 ## Chatbot Preview
 
-Screenshot 1:
-
-<img src="https://github.com/jiangxiaoxuan/babychatbot/raw/master/screenshots/chat-preview.png" />
-
-Screenshot 2:
+Welcome page screenshot:
 
 <img src="https://github.com/jiangxiaoxuan/babychatbot/raw/master/screenshots/welcome-page.png" />
+
+Chat screenshot:
+
+<img src="https://github.com/jiangxiaoxuan/babychatbot/raw/master/screenshots/chat-preview.png" />
 
 ## Development server
 
