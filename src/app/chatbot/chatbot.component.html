@@ -4,10 +4,10 @@
       <li *ngFor="let m of this.chatMessages">
         <div id = "row1">
           <div id="column1">
-            <span class="badge">{{name}}</span>
+            <span class="badge">{{m.userName}}</span>
           </div>
           <div id="column2">
-            {{m}}
+            {{m.message}}
           </div>
         </div>
       </li>

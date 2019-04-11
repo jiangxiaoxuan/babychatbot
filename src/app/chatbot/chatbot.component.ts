@@ -8,6 +8,11 @@ import { Agent } from '../agent';
 
 
 const WAITING_INTENT = 'waiting';
+const BOT_NAME = 'Bunnie the Agent';
+
+class ChatMessage {
+  constructor(private userName: string, private message: string) { }
+}
 
 @Component({
   selector: 'app-chatbot',
@@ -18,9 +23,9 @@ export class ChatbotComponent implements OnInit {
 
   name = 'Freya';
 
-  chatMessages: string[] = [
-    'Hello',
-    'How are you?',
+  chatMessages: ChatMessage[] = [
+    new ChatMessage(BOT_NAME, 'Hello'),
+    new ChatMessage(BOT_NAME, 'How are you?')
   ];
 
   userInput: string;
@@ -38,7 +43,7 @@ export class ChatbotComponent implements OnInit {
   onEnter() {
     const userInput = this.userInput;
     this.userInput = '';
-    this.chatMessages.push(userInput);
+    this.chatMessages.push(new ChatMessage(this.name, userInput));
 
     let currentAgent: Agent;
 
@@ -55,13 +60,13 @@ export class ChatbotComponent implements OnInit {
     }
 
     if (currentAgent === undefined) {
-      this.chatMessages.push('Sorry, I don\'t understand...');
+      this.chatMessages.push(new ChatMessage(BOT_NAME, 'Sorry, I don\'t understand...'));
       return;
     }
 
     currentAgent.handleInput(userInput)
         .subscribe(handleInputResult => {
-            this.chatMessages.push(handleInputResult.reply);
+            this.chatMessages.push(new ChatMessage(BOT_NAME, handleInputResult.reply));
             if (handleInputResult.bailout) {
               this.intent = WAITING_INTENT;
             }
