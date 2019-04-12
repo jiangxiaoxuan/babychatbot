@@ -1,5 +1,7 @@
 # Babychatbot
 
+A chatbot who can play mathematics games, tell jokes and say things you told her to say.
+
 ## Requirements
 
 ### Requirement 1: You should build a chat user interface
