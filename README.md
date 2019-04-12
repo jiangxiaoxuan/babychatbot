@@ -35,6 +35,7 @@ The API documentation is here: http://www.icndb.com/api/
 
 1. More math questions
 2. A bot that has reminder assistant function
+3. Differentiate the colour of text box for bot and user
 
 ## Chatbot Preview
 
