@@ -44,6 +44,12 @@ Chat screenshot:
 
 <img src="https://github.com/jiangxiaoxuan/babychatbot/raw/master/screenshots/chat-preview.png" />
 
+## Chatbot Design
+
+The agent design has tapped on the object oriented design concept and thus provide extensibility to the chatbot for future additional functionalities.
+
+<img src="https://github.com/jiangxiaoxuan/babychatbot/raw/master/screenshots/agent-design.jpg" />
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
